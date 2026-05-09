@@ -16,8 +16,8 @@ import styles from "../index.module.less";
 
 const SEVERITY_COLORS: Record<string, string> = {
   CRITICAL: "red",
-  HIGH: "orange",
-  MEDIUM: "gold",
+  HIGH: "volcano",
+  MEDIUM: "geekblue",
   LOW: "blue",
   INFO: "default",
 };

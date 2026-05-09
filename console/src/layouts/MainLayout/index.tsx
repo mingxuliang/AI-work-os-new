@@ -70,7 +70,6 @@ export default function MainLayout() {
   const location = useLocation();
   const currentPath = location.pathname;
   const { pluginRoutes } = usePlugins();
-
   // Resolve selected key: check static routes first, then plugin routes
   let selectedKey = pathToKey[currentPath] || "";
   if (!selectedKey) {
@@ -126,8 +125,6 @@ export default function MainLayout() {
                   />
                   <Route path="/debug" element={<DebugPage />} />
                   <Route path="/backups" element={<BackupsPage />} />
-
-                  {/* Plugin routes — dynamically injected at runtime */}
                   {pluginRoutes.map((route) => (
                     <Route
                       key={route.path}

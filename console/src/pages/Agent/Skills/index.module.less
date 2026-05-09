@@ -1,4 +1,5 @@
 .skillsPage {
+  min-height: calc(100vh - 128px);
   padding: 0;
   display: flex;
   flex-direction: column;
@@ -292,6 +293,27 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+/* Inside Agent Team cbc-icon3d cube — drop flat tile background */
+.skillIconCube {
+  flex-shrink: 0;
+
+  .fileIcon {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 0;
+    font-size: 28px;
+  }
+
+  .skillEmoji {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border-radius: 0;
+    font-size: 26px;
+  }
 }
 
 .skillEmoji {
@@ -727,7 +749,7 @@
   min-width: 0;
 
   &:hover {
-    border-color: #ff7f16;
+    border-color: #3b82f6;
   }
 
   &.pickerAllCard {
@@ -748,7 +770,7 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #ff7f16;
+  background: #3b82f6;
   color: #fff;
   display: flex;
   align-items: center;
@@ -838,7 +860,7 @@
   }
 
   &:focus {
-    border-color: #ff7f16;
+    border-color: #3b82f6;
   }
 }
 
@@ -998,6 +1020,15 @@
   }
 }
 
+.listItemLeft .fileIcon {
+  background: transparent;
+  border-radius: 8px;
+
+  img {
+    display: block;
+  }
+}
+
 .listItemLeft {
   display: flex;
   align-items: center;
@@ -1075,6 +1106,10 @@
 
 /* ─── Dark mode ─────────────────────────────────────────────────────────────── */
 :global(.dark-mode) {
+  .listItemLeft .fileIcon {
+    background: transparent !important;
+  }
+
   .fileIcon {
     background: rgba(26, 23, 22, 0.88);
   }
@@ -1273,7 +1308,7 @@
     }
 
     &:focus {
-      border-color: #ff7f16;
+      border-color: #3b82f6;
     }
   }
 
@@ -1345,7 +1380,7 @@
   }
 
   .selectedCard {
-    border-color: #ff7f16 !important;
+    border-color: #3b82f6 !important;
     box-shadow: 0 0 0 1px rgba(255, 127, 22, 0.3) !important;
   }
 

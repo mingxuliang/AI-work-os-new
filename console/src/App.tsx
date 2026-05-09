@@ -32,6 +32,7 @@ import { authApi } from "./api/modules/auth";
 import { languageApi } from "./api/modules/language";
 import { getApiUrl, getApiToken, clearAuthToken } from "./api/config";
 import "./styles/layout.css";
+import "./styles/agent-team-port.css";
 import "./styles/form-override.css";
 
 const antdLocaleMap: Record<string, Locale> = {
@@ -178,7 +179,19 @@ function AppInner() {
             ? antdTheme.darkAlgorithm
             : antdTheme.defaultAlgorithm,
           token: {
-            colorPrimary: "#FF7F16",
+            colorPrimary: "#3b82f6",
+            colorLink: "#3b82f6",
+            colorInfo: "#3b82f6",
+            colorSuccess: "#4ade80",
+            colorWarning: "#3b82f6",
+            colorError: "#ef4444",
+            borderRadius: 10,
+            borderRadiusLG: 12,
+            borderRadiusSM: 8,
+            controlHeight: 36,
+            controlHeightLG: 40,
+            fontFamily:
+              "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif",
           },
         }}
       >

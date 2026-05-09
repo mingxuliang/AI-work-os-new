@@ -2,6 +2,7 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
+import type { ServerResponse } from "http";
 
 // Vitest plugin: transforms .css imports inside node_modules to empty stubs.
 // This prevents errors from packages like @agentscope-ai/icons that import CSS.
@@ -16,9 +17,14 @@ const cssStubPlugin = {
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
-  // Empty = same-origin; frontend and backend served together, no hardcoded host.
-  // Use a dedicated Vite-prefixed key so unrelated shell BASE_URL values don't leak into the build.
+  // Empty + dev: same-origin /api with proxy to VITE_DEV_API_PROXY_TARGET (no CORS setup).
+  // Non-empty: browser calls that origin (set QWENPAW_CORS_ORIGINS on backend if needed).
   const apiBaseUrl = env.VITE_API_BASE_URL ?? "";
+  // When VITE_API_BASE_URL is empty, API calls hit the dev server as /api/... .
+  // Proxy to the real backend so the browser stays same-origin (no CORS; backend
+  // does not enable CORSMiddleware unless QWENPAW_CORS_ORIGINS is set).
+  const devApiProxyTarget =
+    env.VITE_DEV_API_PROXY_TARGET || "http://127.0.0.1:8088";
 
   return {
     define: {
@@ -46,6 +52,37 @@ export default defineConfig(({ mode }) => {
     server: {
       host: "0.0.0.0",
       port: 5173,
+      ...(mode === "development" && !apiBaseUrl
+        ? {
+            proxy: {
+              "/api": {
+                target: devApiProxyTarget,
+                changeOrigin: true,
+                configure(proxy) {
+                  proxy.on("error", (err, _req, res) => {
+                    const r = res as ServerResponse | undefined;
+                    if (
+                      r &&
+                      typeof r.writeHead === "function" &&
+                      !r.headersSent
+                    ) {
+                      const msg =
+                        err instanceof Error ? err.message : String(err);
+                      r.writeHead(502, {
+                        "Content-Type": "application/json",
+                      });
+                      r.end(
+                        JSON.stringify({
+                          detail: `Development proxy cannot reach backend at ${devApiProxyTarget}. Start the QwenPaw server or set VITE_DEV_API_PROXY_TARGET in .env.development. (${msg})`,
+                        }),
+                      );
+                    }
+                  });
+                },
+              },
+            },
+          }
+        : {}),
     },
     test: {
       globals: true,

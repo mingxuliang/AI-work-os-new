@@ -561,35 +561,62 @@ if CORS_ORIGINS:
 
 _CONSOLE_STATIC_ENV = "QWENPAW_CONSOLE_STATIC_DIR"
 
+# Avoid stale index.html after `npm run build` (old HTML points at deleted hashed JS).
+_CONSOLE_INDEX_CACHE_HEADERS = {"Cache-Control": "no-store, must-revalidate"}
+
+
+def _console_dist_is_complete(dist: Path) -> bool:
+    """Vite builds require index.html plus assets/. Reject partial or broken dirs."""
+    return (
+        dist.is_dir()
+        and (dist / "index.html").is_file()
+        and (dist / "assets").is_dir()
+    )
+
 
 def _resolve_console_static_dir() -> str:
     from ..constant import EnvVarLoader
 
-    static_dir = EnvVarLoader.get_str(_CONSOLE_STATIC_ENV)
-    if static_dir:
-        return static_dir
-    # Shipped dist lives in the package as static data
     pkg_dir = Path(__file__).resolve().parent.parent
-    candidate = pkg_dir / "console"
-    if candidate.is_dir() and (candidate / "index.html").exists():
-        return str(candidate)
-
-    # Fallback to repo data
-    repo_dir = pkg_dir.parent.parent
-    candidate = repo_dir / "console" / "dist"
-    if candidate.is_dir() and (candidate / "index.html").exists():
-        return str(candidate)
-
-    # Fallback to cwd data
+    repo_root = pkg_dir.parent.parent
     cwd = Path(os.getcwd())
-    for subdir in ("console/dist", "console_dist"):
-        candidate = cwd / subdir
-        if candidate.is_dir() and (candidate / "index.html").exists():
-            return str(candidate)
+    env_static = EnvVarLoader.get_str(_CONSOLE_STATIC_ENV)
 
-    fallback = cwd / "console" / "dist"
+    if env_static:
+        paths = [Path(env_static)]
+    else:
+        # Prefer repo `console/dist` (local `npm run build`) over bundled `qwenpaw/console`.
+        paths = [
+            repo_root / "console" / "dist",
+            pkg_dir / "console",
+            cwd / "console" / "dist",
+            cwd / "console_dist",
+        ]
+
+    seen: set[Path] = set()
+    ordered_unique: list[Path] = []
+    for cand in paths:
+        resolved = cand.resolve()
+        if resolved in seen:
+            continue
+        seen.add(resolved)
+        ordered_unique.append(resolved)
+        if _console_dist_is_complete(resolved):
+            return str(resolved)
+
+    for resolved in ordered_unique:
+        if resolved.is_dir() and (resolved / "index.html").is_file():
+            logger.warning(
+                "Console dir %s has index.html but incomplete `assets/` (run "
+                "`npm run build` in `console/`). UI may appear blank.",
+                resolved,
+            )
+            return str(resolved)
+
+    fallback = (cwd / "console" / "dist").resolve()
     logger.warning(
-        f"Console static directory not found. Falling back to '{fallback}'.",
+        "Console static directory not found. Falling back to '%s'.",
+        fallback,
     )
     return str(fallback)
 
@@ -604,7 +631,10 @@ logger.info(f"STATIC_DIR: {_CONSOLE_STATIC_DIR}")
 @app.get("/")
 def read_root():
     if _CONSOLE_INDEX and _CONSOLE_INDEX.exists():
-        return FileResponse(_CONSOLE_INDEX)
+        return FileResponse(
+            _CONSOLE_INDEX,
+            headers=_CONSOLE_INDEX_CACHE_HEADERS,
+        )
     return {
         "message": (
             f"{PROJECT_NAME} web console is not available. "
@@ -663,7 +693,10 @@ if os.path.isdir(_CONSOLE_STATIC_DIR):
 
     def _serve_console_index():
         if _CONSOLE_INDEX and _CONSOLE_INDEX.exists():
-            return FileResponse(_CONSOLE_INDEX)
+            return FileResponse(
+                _CONSOLE_INDEX,
+                headers=_CONSOLE_INDEX_CACHE_HEADERS,
+            )
 
         raise HTTPException(status_code=404, detail="Not Found")
 

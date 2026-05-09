@@ -95,11 +95,21 @@ export default function LoginPage() {
         }}
       >
         <div style={{ textAlign: "center", marginBottom: 32 }}>
-          <img
-            src={isDark ? "/logo-dark.svg" : "/logo-light.svg"}
-            alt="QwenPaw"
-            style={{ height: 48, marginBottom: 12 }}
-          />
+          <div
+            style={{
+              marginBottom: 12,
+              fontSize: 24,
+              fontWeight: 700,
+              letterSpacing: "-0.02em",
+              background:
+                "linear-gradient(135deg, #2563eb 0%, #0ea5e9 55%, #7c3aed 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            {t("common.systemName")}
+          </div>
           <h2 style={{ margin: 0, fontWeight: 600, fontSize: 20 }}>
             {isRegister ? t("login.registerTitle") : t("login.title")}
           </h2>

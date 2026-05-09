@@ -1,16 +1,21 @@
-// ─── Wrapper ──────────────────────────────────────────────────────────────────
+// ─── Wrapper — on deep-blue sidebar ──────────────────────────────────────────
 .agentSelectorWrapper {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: 8px 12px;
-  background: #fff;
-  border: 1px solid rgba(26, 23, 22, 0.06);
-  border-radius: 8px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
   box-sizing: border-box;
   width: 100%;
   transition: all 0.2s ease;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.11);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
 }
 
 // ─── Collapsed (icon only) ────────────────────────────────────────────────────
@@ -20,17 +25,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(43, 18, 0, 0.04);
-  border: 1px solid rgba(26, 23, 22, 0.08);
-  border-radius: 8px;
-  color: #f07e26;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  color: #93c5fd;
   cursor: default;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   transition: all 0.2s ease;
 
   &:hover {
-    background: rgba(43, 18, 0, 0.08);
-    border-color: rgba(240, 126, 38, 0.3);
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(147, 197, 253, 0.35);
   }
 }
 
@@ -40,39 +45,42 @@
   align-items: center;
   justify-content: space-between;
   gap: 4px;
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.4);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(147, 197, 253, 0.5);
   white-space: nowrap;
   user-select: none;
 
   svg {
-    opacity: 0.5;
+    opacity: 0.6;
   }
 }
 
 .agentCountBadge {
-  font-size: 12px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.4);
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(147, 197, 253, 0.5);
 }
 
 .managementLink {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  font-size: 12px;
-  font-weight: 500;
-  color: #f07e26;
+  font-size: 10px;
+  font-weight: 600;
+  color: #60a5fa;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   line-height: 1;
   flex-shrink: 0;
+  letter-spacing: 0.04em;
 
   &:hover {
-    color: #d96c18;
+    color: #93c5fd;
   }
 }
 
@@ -87,17 +95,12 @@
       box-shadow: none !important;
       height: 32px !important;
       font-size: 13px;
-      font-weight: normal;
+      font-weight: 600;
       border-radius: 8px !important;
       transition: all 0.2s ease;
       padding: 0 !important;
 
-      &:hover {
-        border: none !important;
-        background: transparent !important;
-      }
-
-      &:focus {
+      &:hover, &:focus {
         border: none !important;
         background: transparent !important;
         box-shadow: none !important;
@@ -110,8 +113,8 @@
     }
 
     .ant-select-arrow {
-      color: rgba(26, 23, 22, 0.35);
-      right: 8px;
+      color: rgba(147, 197, 253, 0.5);
+      right: 4px;
 
       .ant-select-suffix {
         display: flex;
@@ -134,17 +137,18 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  color: rgba(0, 0, 0, 0.85);
+  color: rgba(219, 234, 254, 0.92);
 
   svg {
     flex-shrink: 0;
-    color: #f07e26;
-    opacity: 0.85;
+    color: #60a5fa;
+    opacity: 0.9;
   }
 
   span {
     font-weight: 600;
     font-size: 13px;
+    color: rgba(219, 234, 254, 0.92);
   }
 }
 

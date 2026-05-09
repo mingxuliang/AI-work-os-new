@@ -16,7 +16,6 @@ import {
   isStableVersion,
   compareVersions,
 } from "./constants";
-import { useTheme } from "../contexts/ThemeContext";
 import { useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -51,7 +50,6 @@ function UpdateCodeBlock({ code }: { code: string }) {
 
 export default function Header() {
   const { t, i18n } = useTranslation();
-  const { isDark } = useTheme();
   const [version, setVersion] = useState<string>("");
   const [latestVersion, setLatestVersion] = useState<string>("");
   const [updateModalOpen, setUpdateModalOpen] = useState(false);
@@ -153,16 +151,42 @@ export default function Header() {
     <>
       <AntHeader className={styles.header}>
         <div className={styles.logoWrapper}>
-          <img
-            src={isDark ? "/logo-dark.svg" : "/logo-light.svg"}
-            alt="QwenPaw"
-            className={styles.logoImg}
-          />
+          {/* Blue gradient logo badge */}
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: 10,
+              background: "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "0 4px 12px rgba(59,130,246,0.35)",
+              flexShrink: 0,
+              marginRight: 8,
+            }}
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="white"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M12 2a10 10 0 1 0 10 10" />
+              <path d="M12 8v4l2.5 2.5" />
+              <circle cx="18" cy="6" r="3" fill="white" stroke="none" />
+            </svg>
+          </div>
+          <span className={styles.headerTitle}>{t("common.systemName")}</span>
           <div className={styles.logoDivider} />
           {version && (
             <Badge
               dot={!!hasUpdate}
-              color="rgba(255, 157, 77, 1)"
+              color="#3b82f6"
               offset={[4, 28]}
             >
               <span
@@ -183,6 +207,7 @@ export default function Header() {
             <Button
               type="text"
               onClick={() => handleNavClick(getReleaseNotesUrl(i18n.language))}
+              style={{ fontSize: 13, color: "#6b7280" }}
             >
               {t("header.changelog")}
             </Button>
@@ -191,6 +216,7 @@ export default function Header() {
             <Button
               type="text"
               onClick={() => handleNavClick(getDocsUrl(i18n.language))}
+              style={{ fontSize: 13, color: "#6b7280" }}
             >
               {t("header.docs")}
             </Button>
@@ -199,12 +225,17 @@ export default function Header() {
             <Button
               type="text"
               onClick={() => handleNavClick(getFaqUrl(i18n.language))}
+              style={{ fontSize: 13, color: "#6b7280" }}
             >
               {t("header.faq")}
             </Button>
           </Tooltip>
           <Tooltip title={t("header.github")}>
-            <Button type="text" onClick={() => handleNavClick(GITHUB_URL)}>
+            <Button
+              type="text"
+              onClick={() => handleNavClick(GITHUB_URL)}
+              style={{ fontSize: 13, color: "#6b7280" }}
+            >
               {t("header.github")}
             </Button>
           </Tooltip>

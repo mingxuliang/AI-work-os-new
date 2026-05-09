@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 import { useAppMessage } from "../hooks/useAppMessage";
 import AgentSelector from "../components/AgentSelector";
 import {
-  SparkChatTabFill,
   SparkWifiLine,
   SparkUserGroupLine,
   SparkDateLine,
@@ -46,6 +45,7 @@ import { usePlugins } from "../plugins/PluginContext";
 import styles from "./index.module.less";
 import { useTheme } from "../contexts/ThemeContext";
 import { KEY_TO_PATH, DEFAULT_OPEN_KEYS } from "./constants";
+import { Bot } from "lucide-react";
 
 // ── Layout ────────────────────────────────────────────────────────────────
 
@@ -140,7 +140,7 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
   const collapsedNavItems = [
     {
       key: "chat",
-      icon: <SparkChatTabFill size={18} />,
+      icon: <Bot size={18} strokeWidth={1.85} aria-hidden />,
       path: "/chat",
       label: t("nav.chat"),
     },
@@ -279,7 +279,7 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
     {
       key: "chat",
       label: collapsed ? null : t("nav.chat"),
-      icon: <SparkChatTabFill size={16} />,
+      icon: <Bot size={16} strokeWidth={1.85} aria-hidden />,
     },
     {
       key: "control-group",
@@ -428,6 +428,8 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
         collapsed ? ` ${styles.siderCollapsed}` : ""
       }${isDark ? ` ${styles.siderDark}` : ""}`}
     >
+      <span className={styles.siderAmbientOrbA} aria-hidden />
+      <span className={styles.siderAmbientOrbB} aria-hidden />
       {collapsed ? (
         <nav className={styles.collapsedNav}>
           {collapsedNavItems.map((item) => {

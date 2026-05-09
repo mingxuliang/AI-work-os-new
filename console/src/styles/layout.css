@@ -1,15 +1,214 @@
+/* ─── Design System: Enterprise AI Workbench ───────────────────────────────── */
+
 html,
 body {
   height: 100%;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  background: #f9f8f4;
+  background: #f0f4fa;
 }
 
 .qwenpaw-layout {
-  background: #f9f8f4;
+  background: #f0f4fa;
 }
+
+/* ─── Page layout helpers ─────────────────────────────────────────────────── */
+.page-container {
+  background: #f0f4fa !important;
+  overflow-y: auto;
+}
+
+.page-content {
+  background: transparent;
+  padding: 20px 24px;
+  min-height: calc(100vh - 56px);
+}
+
+/* ─── Ant Design layout background overrides ────────────────────────────────── */
+.qwenpaw-layout-content {
+  background: #f0f4fa !important;
+}
+
+.qwenpaw-layout-has-sider > .qwenpaw-layout,
+.qwenpaw-layout-has-sider > .qwenpaw-layout-content {
+  background: #f0f4fa !important;
+}
+
+/* ─── Typography refinements ──────────────────────────────────────────────── */
+body {
+  font-feature-settings: "cv01", "cv03", "cv04", "cv11";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Card baseline ──────────────────────────────────────────────────────── */
+.qwenpaw-card,
+.ant-card {
+  border-radius: 16px !important;
+  border-color: #f3f4f6 !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+  background: #ffffff !important;
+}
+
+.qwenpaw-card-head,
+.ant-card-head {
+  border-radius: 16px 16px 0 0 !important;
+  border-bottom-color: #f3f4f6 !important;
+  padding: 0 20px !important;
+  min-height: 48px !important;
+}
+
+.qwenpaw-card-body,
+.ant-card-body {
+  padding: 16px 20px !important;
+}
+
+/* ─── Table refinements ──────────────────────────────────────────────────── */
+.qwenpaw-table-wrapper,
+.ant-table-wrapper {
+  border-radius: 16px !important;
+  overflow: hidden;
+}
+
+.qwenpaw-table,
+.ant-table {
+  border-radius: 16px !important;
+}
+
+/* ─── Form / Input refinements ───────────────────────────────────────────── */
+.qwenpaw-input,
+.ant-input {
+  border-radius: 10px !important;
+  border-color: #e5e7eb !important;
+  background: #fafafa;
+  transition: all 0.18s ease;
+}
+
+.qwenpaw-input:focus,
+.ant-input:focus,
+.qwenpaw-input-focused,
+.ant-input-focused {
+  border-color: #3b82f6 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12) !important;
+}
+
+.qwenpaw-input-affix-wrapper,
+.ant-input-affix-wrapper {
+  border-radius: 10px !important;
+  border-color: #e5e7eb !important;
+  background: #fafafa;
+}
+
+.qwenpaw-input-affix-wrapper:focus-within,
+.ant-input-affix-wrapper:focus-within {
+  border-color: #3b82f6 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12) !important;
+}
+
+/* ─── Select refinements ─────────────────────────────────────────────────── */
+.qwenpaw-select-selector,
+.ant-select-selector {
+  border-radius: 10px !important;
+  border-color: #e5e7eb !important;
+  background: #fafafa !important;
+  transition: all 0.18s ease !important;
+}
+
+.qwenpaw-select-focused .qwenpaw-select-selector,
+.ant-select-focused .ant-select-selector {
+  border-color: #3b82f6 !important;
+  background: #ffffff !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12) !important;
+}
+
+/* ─── Button refinements ─────────────────────────────────────────────────── */
+.qwenpaw-btn-primary,
+.ant-btn-primary {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%) !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.28) !important;
+  font-weight: 600;
+}
+
+.qwenpaw-btn-primary:hover,
+.ant-btn-primary:hover {
+  background: linear-gradient(135deg, #60a5fa 0%, #2563eb 100%) !important;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.36) !important;
+}
+
+/* ─── Tag refinements ────────────────────────────────────────────────────── */
+.qwenpaw-tag,
+.ant-tag {
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 2px 8px !important;
+  border: 1px solid transparent !important;
+}
+
+/* ─── Dropdown / Popup ───────────────────────────────────────────────────── */
+.qwenpaw-dropdown .qwenpaw-dropdown-menu,
+.ant-dropdown .ant-dropdown-menu {
+  border-radius: 12px !important;
+  border: 1px solid #f3f4f6 !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+  padding: 6px !important;
+}
+
+.qwenpaw-dropdown-menu-item,
+.ant-dropdown-menu-item {
+  border-radius: 8px !important;
+  font-size: 13px !important;
+}
+
+/* ─── Switch ─────────────────────────────────────────────────────────────── */
+.qwenpaw-switch-checked,
+.ant-switch-checked {
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+}
+
+/* ─── Animation keyframes ─────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes message-in {
+  0%   { opacity: 0; transform: translateY(12px) scale(0.96); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+@keyframes guide-float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
+@keyframes voice-bar {
+  0%, 100% { height: 4px; }
+  50%       { height: 16px; }
+}
+
+/* Utility animation classes */
+.animate-fadeIn       { animation: fadeIn 0.2s ease-out; }
+.animate-fadeInUp     { animation: fadeInUp 0.3s ease-out; }
+.animate-message-in   { animation: message-in 0.25s ease-out; }
+.animate-cursor-blink { animation: cursor-blink 1s infinite; }
+.animate-guide-float  { animation: guide-float 3s ease-in-out infinite; }
+.animate-voice-bar    { animation: voice-bar 0.8s ease-in-out infinite; }
+
 
 /* ─── Dark mode global token overrides ─────────────────────────────────────── */
 html.dark-mode {
@@ -24,18 +223,56 @@ html.dark-mode body {
 /* Ant Design layout background in dark mode */
 html.dark-mode .ant-layout,
 html.dark-mode .qwenpaw-layout {
-  background: #141414 !important;
+  background: #0f1218 !important;
 }
 
 html.dark-mode .ant-layout-content,
 html.dark-mode .qwenpaw-layout-content {
-  background: #141414 !important;
+  background: #0f1218 !important;
+}
+
+html.dark-mode .page-container {
+  background: #0f1218 !important;
 }
 
 /* Page content area background */
 html.dark-mode .page-content {
-  background: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+}
+
+/* Dark mode card */
+html.dark-mode .qwenpaw-card,
+html.dark-mode .ant-card {
+  background: #1a2035 !important;
+  border-color: rgba(255, 255, 255, 0.07) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.dark-mode .qwenpaw-card-head,
+html.dark-mode .ant-card-head {
+  background: #1a2035 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.07) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+html.dark-mode .qwenpaw-card-body,
+html.dark-mode .ant-card-body {
+  background: #1a2035 !important;
+}
+
+/* Dark input */
+html.dark-mode .qwenpaw-input,
+html.dark-mode .ant-input {
+  background: #1e2742 !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+html.dark-mode .qwenpaw-input:focus,
+html.dark-mode .ant-input:focus {
+  border-color: #3b82f6 !important;
+  background: #1e2742 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.18) !important;
 }
 
 /* Card components — @agentscope-ai/design uses qwenpaw prefix */
@@ -182,8 +419,8 @@ html.dark-mode .ant-pagination .ant-pagination-item a {
 
 html.dark-mode .qwenpaw-pagination .qwenpaw-pagination-item-active,
 html.dark-mode .ant-pagination .ant-pagination-item-active {
-  background: #ff7f16 !important;
-  border-color: #ff7f16 !important;
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
 }
 
 html.dark-mode .qwenpaw-pagination .qwenpaw-pagination-item-active a,
@@ -210,7 +447,7 @@ html.dark-mode .qwenpaw-table-column-sorter-up.active,
 html.dark-mode .qwenpaw-table-column-sorter-down.active,
 html.dark-mode .ant-table-column-sorter-up.active,
 html.dark-mode .ant-table-column-sorter-down.active {
-  color: #ff7f16 !important;
+  color: #3b82f6 !important;
 }
 
 /* Checkbox in table */
@@ -222,8 +459,8 @@ html.dark-mode .ant-checkbox-inner {
 
 html.dark-mode .qwenpaw-checkbox-checked .qwenpaw-checkbox-inner,
 html.dark-mode .ant-checkbox-checked .ant-checkbox-inner {
-  background: #ff7f16 !important;
-  border-color: #ff7f16 !important;
+  background: #3b82f6 !important;
+  border-color: #3b82f6 !important;
 }
 
 /* Page titles (h1) */
@@ -316,7 +553,7 @@ html.dark-mode .ant-select-item-option-active {
 html.dark-mode .qwenpaw-select-item-option-selected,
 html.dark-mode .ant-select-item-option-selected {
   background: rgba(97, 92, 237, 0.2) !important;
-  color: #ff7f16 !important;
+  color: #3b82f6 !important;
 }
 
 /* Form labels */
@@ -397,7 +634,7 @@ html.dark-mode
   .ant-picker-time-panel-cell-selected
   .ant-picker-time-panel-cell-inner {
   background: rgba(97, 92, 237, 0.2) !important;
-  color: #ff7f16 !important;
+  color: #3b82f6 !important;
 }
 
 /* DatePicker / RangePicker calendar panel */
@@ -467,7 +704,7 @@ html.dark-mode .ant-picker-cell-disabled {
 /* Today marker */
 html.dark-mode .qwenpaw-picker-cell-today .qwenpaw-picker-cell-inner::before,
 html.dark-mode .ant-picker-cell-today .ant-picker-cell-inner::before {
-  border-color: #ff7f16 !important;
+  border-color: #3b82f6 !important;
 }
 
 /* Selected start/end cell */
@@ -477,7 +714,7 @@ html.dark-mode .qwenpaw-picker-cell-range-start .qwenpaw-picker-cell-inner,
 html.dark-mode .ant-picker-cell-range-start .ant-picker-cell-inner,
 html.dark-mode .qwenpaw-picker-cell-range-end .qwenpaw-picker-cell-inner,
 html.dark-mode .ant-picker-cell-range-end .ant-picker-cell-inner {
-  background: #ff7f16 !important;
+  background: #3b82f6 !important;
   color: #fff !important;
 }
 
@@ -503,7 +740,7 @@ html.dark-mode
 html.dark-mode
   .qwenpaw-picker-cell-in-view.qwenpaw-picker-cell-range-hover-end::after,
 html.dark-mode .ant-picker-cell-in-view.ant-picker-cell-range-hover-end::after {
-  border-color: #ff7f16 !important;
+  border-color: #3b82f6 !important;
 }
 
 /* Panel footer (OK button area) */
@@ -515,7 +752,7 @@ html.dark-mode .ant-picker-footer {
 
 html.dark-mode .qwenpaw-picker-today-btn,
 html.dark-mode .ant-picker-today-btn {
-  color: #ff7f16 !important;
+  color: #3b82f6 !important;
 }
 
 /* Divider between two panels in RangePicker */
@@ -673,12 +910,12 @@ html.dark-mode .ant-slider-rail {
 
 html.dark-mode .qwenpaw-slider-track,
 html.dark-mode .ant-slider-track {
-  background-color: #ff7f16 !important;
+  background-color: #3b82f6 !important;
 }
 
 html.dark-mode .qwenpaw-slider-mark-text,
 html.dark-mode .ant-slider-mark-text {
-  color: #ff7f16 !important;
+  color: #3b82f6 !important;
 }
 
 html.dark-mode .qwenpaw-form-item-label > label .qwenpaw-form-item-tooltip,
@@ -688,7 +925,7 @@ html.dark-mode .ant-form-item-label > label .ant-form-item-tooltip {
 
 html.dark-mode .qwenpaw-slider-handle::after,
 html.dark-mode .ant-slider-handle::after {
-  box-shadow: 0 0 0 2px #ff7f16 !important;
+  box-shadow: 0 0 0 2px #3b82f6 !important;
   background-color: #1f1f1f !important;
 }
 
@@ -797,7 +1034,7 @@ html.dark-mode [class*="chat-anywhere"] [class*="message"] code {
 }
 
 html.dark-mode [class*="chat-anywhere"] [class*="message"] a {
-  color: #ff7f16 !important;
+  color: #3b82f6 !important;
 }
 
 #root {
@@ -1083,7 +1320,25 @@ html.dark-mode .debug-log-path strong {
   max-width: 100% !important;
 }
 
-[class*="tool-call-block-content"] {
-  max-height: 250px !important;
-  overflow-y: auto !important;
+/* Warning Alert → 蓝色信息样式（全局去琥珀黄） */
+.ant-alert-warning,
+.qwenpaw-alert-warning {
+  background-color: #e6f4ff !important;
+  border: 1px solid #91caff !important;
+}
+
+.ant-alert-warning .ant-alert-icon,
+.qwenpaw-alert-warning .qwenpaw-alert-icon {
+  color: #1677ff !important;
+}
+
+html.dark-mode .ant-alert-warning,
+html.dark-mode .qwenpaw-alert-warning {
+  background-color: rgba(22, 119, 255, 0.12) !important;
+  border-color: rgba(59, 130, 246, 0.45) !important;
+}
+
+html.dark-mode .ant-alert-warning .ant-alert-icon,
+html.dark-mode .qwenpaw-alert-warning .qwenpaw-alert-icon {
+  color: #3b82f6 !important;
 }

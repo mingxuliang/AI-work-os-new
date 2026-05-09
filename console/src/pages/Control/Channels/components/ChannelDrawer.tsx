@@ -938,7 +938,7 @@ export function ChannelDrawer({
           <>
             <ConfigProvider prefixCls="ant">
               <Alert
-                type="warning"
+                type="info"
                 showIcon
                 message={t("channels.wecomSetupGuide")}
                 style={{ marginBottom: 16 }}
@@ -1063,7 +1063,7 @@ export function ChannelDrawer({
                 style={{ marginBottom: 16 }}
               />
               <Alert
-                type="warning"
+                type="info"
                 showIcon
                 message={t("channels.wechatContextTokenLimit")}
                 style={{ marginBottom: 16 }}

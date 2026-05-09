@@ -11,6 +11,7 @@ import { Flex, Tooltip } from "antd";
 import ChatSessionDrawer from "../ChatSessionDrawer";
 import ChatSearchPanel from "../ChatSearchPanel";
 import PlanPanel from "../../../../components/PlanPanel";
+import styles from "./index.module.less";
 
 const PlanIcon = () => (
   <svg
@@ -30,10 +31,12 @@ const PlanIcon = () => (
 
 interface ChatActionGroupProps {
   planEnabled?: boolean;
+  omitNewChat?: boolean;
 }
 
 const ChatActionGroup: React.FC<ChatActionGroupProps> = ({
   planEnabled = false,
+  omitNewChat = false,
 }) => {
   const { t } = useTranslation();
   const [historyOpen, setHistoryOpen] = useState(false);
@@ -42,7 +45,7 @@ const ChatActionGroup: React.FC<ChatActionGroupProps> = ({
   const { createSession } = useChatAnywhereSessions();
 
   return (
-    <Flex gap={8} align="center">
+    <Flex gap={8} align="center" className={styles.actionGroup}>
       {planEnabled && (
         <Tooltip title={t("plan.title", "Plan")} mouseEnterDelay={0.5}>
           <IconButton
@@ -52,13 +55,15 @@ const ChatActionGroup: React.FC<ChatActionGroupProps> = ({
           />
         </Tooltip>
       )}
-      <Tooltip title={t("chat.newChatTooltip")} mouseEnterDelay={0.5}>
-        <IconButton
-          bordered={false}
-          icon={<SparkNewChatFill />}
-          onClick={() => createSession()}
-        />
-      </Tooltip>
+      {!omitNewChat && (
+        <Tooltip title={t("chat.newChatTooltip")} mouseEnterDelay={0.5}>
+          <IconButton
+            bordered={false}
+            icon={<SparkNewChatFill />}
+            onClick={() => createSession()}
+          />
+        </Tooltip>
+      )}
       <Tooltip title={t("chat.searchTooltip")} mouseEnterDelay={0.5}>
         <IconButton
           bordered={false}

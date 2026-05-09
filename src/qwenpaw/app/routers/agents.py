@@ -112,12 +112,33 @@ def _get_multi_agent_manager(request: Request) -> MultiAgentManager:
 
 def _normalized_agent_order(config) -> list[str]:
     """Return a deduplicated agent order covering every configured agent."""
-    profile_ids = list(config.agents.profiles.keys())
+    agents_cfg = getattr(config, "agents", None)
+    if agents_cfg is None:
+        return []
+    profiles_map = getattr(agents_cfg, "profiles", None) or {}
+    profile_ids = list(profiles_map.keys())
     ordered_ids: list[str] = []
 
-    for agent_id in config.agents.agent_order:
-        if agent_id in config.agents.profiles and agent_id not in ordered_ids:
-            ordered_ids.append(agent_id)
+    preferred_order = getattr(agents_cfg, "agent_order", None) or []
+    try:
+        order_iterable = tuple(preferred_order)
+    except TypeError:
+        logger.warning(
+            "agents.agent_order is not iterable; falling back to profile keys order",
+        )
+        order_iterable = ()
+
+    for agent_id in order_iterable:
+        if isinstance(agent_id, str):
+            aid = agent_id.strip()
+        elif agent_id is not None:
+            aid = str(agent_id).strip()
+        else:
+            continue
+        if not aid:
+            continue
+        if aid in profiles_map and aid not in ordered_ids:
+            ordered_ids.append(aid)
 
     for agent_id in profile_ids:
         if agent_id not in ordered_ids:
@@ -162,17 +183,45 @@ def _read_profile_description(workspace_dir: str) -> str:
 )
 async def list_agents() -> AgentListResponse:
     """List all configured agents."""
-    config = load_config()
-    ordered_agent_ids = _normalized_agent_order(config)
+    try:
+        config = load_config()
+    except Exception as exc:  # noqa: BLE001
+        logger.exception("list_agents: load_config failed: %s", exc)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to load application config: {exc}",
+        ) from exc
 
-    agents = []
+    try:
+        ordered_agent_ids = _normalized_agent_order(config)
+    except Exception as exc:  # noqa: BLE001
+        logger.exception("list_agents: normalized agent order failed: %s", exc)
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to read agent ordering: {exc}",
+        ) from exc
+
+    agents: list[AgentSummary] = []
+    profiles_map = getattr(config.agents, "profiles", {}) or {}
+
     for agent_id in ordered_agent_ids:
-        agent_ref = config.agents.profiles[agent_id]
+        agent_ref = profiles_map.get(agent_id)
+        if agent_ref is None:
+            logger.warning(
+                "list_agents: agent_id '%s' in order but missing from profiles; skipping",
+                agent_id,
+            )
+            continue
+
+        ws_dir_raw = getattr(agent_ref, "workspace_dir", "") or ""
+        ws_dir_safe = ws_dir_raw
+        enabled_flag = getattr(agent_ref, "enabled", True)
+
         try:
             agent_config = load_agent_config(agent_id)
             description = agent_config.description or ""
 
-            profile_desc = _read_profile_description(agent_ref.workspace_dir)
+            profile_desc = _read_profile_description(ws_dir_raw)
             if profile_desc:
                 if description.strip():
                     description = f"{description.strip()} | {profile_desc}"
@@ -180,25 +229,44 @@ async def list_agents() -> AgentListResponse:
                     description = profile_desc
 
             active_model = agent_config.active_model
+            slot_for_response: ModelSlotConfig | None
+            try:
+                if active_model is None:
+                    slot_for_response = None
+                else:
+                    slot_for_response = ModelSlotConfig(
+                        provider_id=str(
+                            getattr(active_model, "provider_id", "") or "",
+                        ),
+                        model=str(getattr(active_model, "model", "") or ""),
+                    )
+            except Exception:  # noqa: BLE001
+                slot_for_response = None
 
             agents.append(
                 AgentSummary(
                     id=agent_id,
                     name=agent_config.name,
                     description=description,
-                    workspace_dir=agent_ref.workspace_dir,
-                    enabled=getattr(agent_ref, "enabled", True),
-                    active_model=active_model,
+                    workspace_dir=ws_dir_safe,
+                    enabled=enabled_flag,
+                    active_model=slot_for_response,
                 ),
             )
-        except Exception:  # noqa: E722
+        except Exception as exc:  # noqa: BLE001
+            logger.warning(
+                "list_agents: falling back summary for '%s': %s",
+                agent_id,
+                exc,
+                exc_info=True,
+            )
             agents.append(
                 AgentSummary(
                     id=agent_id,
-                    name=agent_id.title(),
+                    name=agent_id.replace("_", " ").title(),
                     description="",
-                    workspace_dir=agent_ref.workspace_dir,
-                    enabled=getattr(agent_ref, "enabled", True),
+                    workspace_dir=ws_dir_safe,
+                    enabled=enabled_flag,
                 ),
             )
 

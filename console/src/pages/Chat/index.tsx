@@ -19,15 +19,14 @@ import { getApiUrl } from "../../api/config";
 import { buildAuthHeaders } from "../../api/authHeaders";
 import { providerApi } from "../../api/modules/provider";
 import type { ProviderInfo, ModelInfo } from "../../api/types";
-import ModelSelector from "./ModelSelector";
 import { useTheme } from "../../contexts/ThemeContext";
 import { useAgentStore } from "../../stores/agentStore";
 import { useChatAnywhereInput } from "@agentscope-ai/chat";
 import styles from "./index.module.less";
 import { IconButton } from "@agentscope-ai/design";
-import ChatActionGroup from "./components/ChatActionGroup";
-import ChatHeaderTitle from "./components/ChatHeaderTitle";
-import ChatSessionInitializer from "./components/ChatSessionInitializer";
+import CopawChatHeader from "./components/CopawChatHeader";
+import ChatAmbient from "./components/ChatAmbient";
+import CopawChatWelcome from "./components/CopawChatWelcome";
 import { ApprovalCard } from "../../components/ApprovalCard/ApprovalCard";
 import { commandsApi } from "../../api/modules/commands";
 import { useApprovalContext } from "../../contexts/ApprovalContext";
@@ -50,6 +49,7 @@ interface ApprovalMessageData {
 import WhisperSpeechButton, {
   WhisperSpeechButtonRef,
 } from "./components/WhisperSpeechButton";
+import SenderTypingWaveform from "./components/SenderTypingWaveform";
 
 import {
   toDisplayUrl,
@@ -497,6 +497,7 @@ function RuntimeLoadingBridge({
   return null;
 }
 
+
 export default function ChatPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -705,6 +706,9 @@ export default function ChatPage() {
       textarea.focus();
     }
   }, []);
+
+  /** Stable tree for AgentScope sender.beforeUI — TypingWaveform from ai助手. */
+  const senderTypingWaveform = useMemo(() => <SenderTypingWaveform />, []);
 
   useMessageHistoryNavigation(chatRef, isChatActive, isComposingRef);
 
@@ -1029,26 +1033,30 @@ export default function ChatPage() {
         darkMode: isDark,
         leftHeader: {
           ...defaultConfig.theme.leftHeader,
+          title: t("common.systemName"),
         },
         rightHeader: (
-          <>
-            <ChatSessionInitializer />
-            <RuntimeLoadingBridge bridgeRef={runtimeLoadingBridgeRef} />
-            <ChatHeaderTitle />
-            <span style={{ flex: 1 }} />
-            <ModelSelector />
-            <ChatActionGroup planEnabled={planEnabled} />
-          </>
+          <CopawChatHeader
+            planEnabled={planEnabled}
+            runtimeBridge={
+              <RuntimeLoadingBridge bridgeRef={runtimeLoadingBridgeRef} />
+            }
+          />
         ),
       },
       welcome: {
         ...i18nConfig.welcome,
-        nick: "QwenPaw",
-        avatar: "/qwenpaw.png",
+        nick: t("common.systemName"),
+        /* Same Bot + blue orb as CopawChatWelcome (AgentScope renders this via Avatar src). */
+        avatar: "/copaw-assistant-bot.svg",
+        render: ({ prompts, onSubmit }: any) => (
+          <CopawChatWelcome prompts={prompts} onSubmit={onSubmit} />
+        ),
       },
       sender: {
         ...(i18nConfig as any)?.sender,
         beforeSubmit: handleBeforeSubmit,
+        beforeUI: senderTypingWaveform,
         allowSpeech: !whisperEnabled,
         prefix: whisperEnabled ? (
           <WhisperSpeechButton
@@ -1159,10 +1167,12 @@ export default function ChatPage() {
     toolRenderConfig,
     scheduleHistoryClear,
     planEnabled,
+    senderTypingWaveform,
   ]);
 
   return (
     <div
+      className={styles.chatPage}
       style={{
         height: "100%",
         width: "100%",
@@ -1170,6 +1180,7 @@ export default function ChatPage() {
         flexDirection: "column",
       }}
     >
+      <ChatAmbient isDark={isDark} />
       <div className={styles.chatMessagesArea}>
         <AgentScopeRuntimeWebUI
           ref={chatRef}
@@ -1234,7 +1245,7 @@ export default function ChatPage() {
         }}
       >
         <Result
-          icon={<ExclamationCircleOutlined style={{ color: "#faad14" }} />}
+          icon={<ExclamationCircleOutlined style={{ color: "#3b82f6" }} />}
           title={
             <span
               style={{ color: isDark ? "rgba(255,255,255,0.88)" : undefined }}

@@ -573,7 +573,27 @@ class AuthMiddleware(BaseHTTPMiddleware):
         call_next,
     ) -> Response:
         """Check Bearer token on protected API routes; skip public paths."""
-        if self._should_skip_auth(request):
+        try:
+            should_skip = self._should_skip_auth(request)
+        except Exception as exc:
+            logger.exception(
+                "AuthMiddleware: _should_skip_auth failed: %s",
+                exc,
+            )
+            return Response(
+                content=json.dumps(
+                    {
+                        "detail": (
+                            "Server error while checking authentication gate. "
+                            f"See logs. ({exc})"
+                        ),
+                    },
+                ),
+                status_code=503,
+                media_type="application/json",
+            )
+
+        if should_skip:
             return await call_next(request)
 
         token = self._extract_token(request)
@@ -621,8 +641,21 @@ class AuthMiddleware(BaseHTTPMiddleware):
         from ..config import load_config
 
         client_host = request.client.host if request.client else ""
-        config = load_config()
-        allowed_hosts = config.security.allow_no_auth_hosts
+        try:
+            config = load_config()
+            security = getattr(config, "security", None)
+            allowed_hosts = getattr(security, "allow_no_auth_hosts", None)
+            if not isinstance(allowed_hosts, list):
+                allowed_hosts = []
+        except Exception as exc:
+            logger.warning(
+                "AuthMiddleware: load_config failed while checking "
+                "allow_no_auth_hosts (treating as empty whitelist): %s",
+                exc,
+                exc_info=True,
+            )
+            allowed_hosts = []
+
         return client_host in allowed_hosts
 
     @staticmethod
