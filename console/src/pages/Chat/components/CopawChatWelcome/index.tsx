@@ -7,11 +7,16 @@ import {
   BookOpen,
   Bot,
   Code,
+  Cpu,
+  Factory,
   FileText,
+  Headphones,
   Lightbulb,
-  MessageCircle,
   Monitor,
+  Network,
   Rocket,
+  TrendingUp,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import styles from "./index.module.less";
@@ -44,6 +49,16 @@ const SUGGESTED_ICON_CYCLE: LucideIcon[] = [
   BookOpen,
   Code,
 ];
+
+/** Agent 团队面板对齐的快捷场景标签（点击进入输入框）。 */
+const TEAM_TAG_CONFIG = [
+  { Icon: Users, labelKey: "chat.aiDocWelcome.tagTeamMgmt" },
+  { Icon: Cpu, labelKey: "chat.aiDocWelcome.tagTeamRnD" },
+  { Icon: Factory, labelKey: "chat.aiDocWelcome.tagTeamMfg" },
+  { Icon: TrendingUp, labelKey: "chat.aiDocWelcome.tagTeamSales" },
+  { Icon: Network, labelKey: "chat.aiDocWelcome.tagTeamCross" },
+  { Icon: Headphones, labelKey: "chat.aiDocWelcome.tagTeamSvc" },
+] as const;
 
 const container = {
   hidden: { opacity: 0, y: 10 },
@@ -176,26 +191,14 @@ const CopawChatWelcome: React.FC<CopawChatWelcomeProps> = ({
       <p className={styles.heroIntro}>{t("chat.aiDocWelcome.intro")}</p>
 
       <div className={styles.tagRow}>
-        <BrandTag
-          text={t("chat.aiDocWelcome.tagQna")}
-          icon={<MessageCircle size={14} />}
-          onActivate={onTagClick}
-        />
-        <BrandTag
-          text={t("chat.aiDocWelcome.tagExtract")}
-          icon={<Lightbulb size={14} />}
-          onActivate={onTagClick}
-        />
-        <BrandTag
-          text={t("chat.aiDocWelcome.tagCourse")}
-          icon={<BookOpen size={14} />}
-          onActivate={onTagClick}
-        />
-        <BrandTag
-          text={t("chat.aiDocWelcome.tagDoc")}
-          icon={<FileText size={14} />}
-          onActivate={onTagClick}
-        />
+        {TEAM_TAG_CONFIG.map(({ Icon, labelKey }) => (
+          <BrandTag
+            key={labelKey}
+            text={t(labelKey)}
+            icon={<Icon size={14} />}
+            onActivate={onTagClick}
+          />
+        ))}
       </div>
 
       <div className={styles.promptGrid}>

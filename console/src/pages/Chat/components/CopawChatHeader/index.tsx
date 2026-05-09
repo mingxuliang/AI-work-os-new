@@ -22,7 +22,7 @@ const CopawChatHeader: React.FC<CopawChatHeaderProps> = ({
       <div className={styles.headerTrailing}>
         <AgentSelector variant="chatToolbar" />
         <ModelSelector />
-        <ChatActionGroup omitNewChat planEnabled={planEnabled} />
+        <ChatActionGroup planEnabled={planEnabled} />
       </div>
     </div>
   );
