@@ -186,7 +186,6 @@ function SortableAgentCard({
             <Button
               type="primary"
               size="small"
-              ghost
               icon={<EditOutlined />}
               onClick={() => onEdit(agent)}
               disabled={defaultAgent}
@@ -213,6 +212,7 @@ function SortableAgentCard({
               cancelText={t("common.cancel")}
             >
               <Button
+                type="primary"
                 size="small"
                 icon={agent.enabled ? <EyeOff size={14} /> : <Eye size={14} />}
                 disabled={defaultAgent}

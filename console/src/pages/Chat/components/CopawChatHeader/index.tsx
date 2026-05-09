@@ -19,9 +19,11 @@ const CopawChatHeader: React.FC<CopawChatHeaderProps> = ({
       <ChatSessionInitializer />
       {runtimeBridge}
       <div className={styles.spacer} />
-      <AgentSelector variant="chatToolbar" />
-      <ModelSelector />
-      <ChatActionGroup omitNewChat planEnabled={planEnabled} />
+      <div className={styles.headerTrailing}>
+        <AgentSelector variant="chatToolbar" />
+        <ModelSelector />
+        <ChatActionGroup omitNewChat planEnabled={planEnabled} />
+      </div>
     </div>
   );
 };

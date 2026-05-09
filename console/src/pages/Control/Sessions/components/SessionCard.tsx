@@ -97,7 +97,7 @@ export function SessionCard({
         </div>
 
         <div className="cbc-agent-card-actions">
-          <Button size="small" type="primary" ghost onClick={(e) => { stop(e); onEdit(session); }}>
+          <Button size="small" type="primary" onClick={(e) => { stop(e); onEdit(session); }}>
             {t("common.edit")}
           </Button>
           <Button size="small" onClick={(e) => { stop(e); onView(session); }}>

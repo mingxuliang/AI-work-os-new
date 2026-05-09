@@ -149,7 +149,7 @@ export function CronJobCard({
           <Button size="small" onClick={(e) => { stop(e); onToggleEnabled(job); }}>
             {job.enabled ? t("cronJobs.disable") : t("common.enable")}
           </Button>
-          <Button size="small" type="primary" ghost onClick={(e) => { stop(e); onExecuteNow(job); }}>
+          <Button size="small" type="primary" onClick={(e) => { stop(e); onExecuteNow(job); }}>
             {t("cronJobs.executeNow")}
           </Button>
           <Dropdown menu={{ items: menuItems }} placement="bottomRight">

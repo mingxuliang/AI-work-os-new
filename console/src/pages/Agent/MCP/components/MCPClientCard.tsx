@@ -210,7 +210,6 @@ export const MCPClientCard = React.memo(function MCPClientCard({
             <Button
               size="small"
               type="primary"
-              ghost
               onClick={(e) => {
                 e.stopPropagation();
                 handleToggleClick(e);

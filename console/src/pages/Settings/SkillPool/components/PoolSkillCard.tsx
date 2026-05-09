@@ -173,7 +173,8 @@ export function PoolSkillCard({
         {(isHover || batchModeEnabled) && (
           <div className="cbc-agent-card-actions">
             <Button
-              type="default"
+              type="primary"
+              size="small"
               className={styles.actionButton}
               disabled={batchModeEnabled}
               onClick={(e) => {

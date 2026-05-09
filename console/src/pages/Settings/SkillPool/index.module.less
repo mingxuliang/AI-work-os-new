@@ -437,6 +437,25 @@
   gap: 12px;
   flex-shrink: 0;
   margin-left: 24px;
+
+  :global(.qwenpaw-btn-primary),
+  :global(.ant-btn-primary) {
+    color: #fff !important;
+
+    &:hover:not(:disabled),
+    &:focus-visible:not(:disabled) {
+      color: #fff !important;
+    }
+
+    &:disabled {
+      color: rgba(255, 255, 255, 0.65) !important;
+    }
+
+    :global(.anticon),
+    svg {
+      color: inherit !important;
+    }
+  }
 }
 
 /* ─── Status with Select (batch selection) ───────────────────────────────── */
@@ -834,10 +853,6 @@
   flex: 1;
   height: 34px;
   font-size: 14px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #ffffff;
-  color: rgba(20, 20, 19, 0.88);
-  cursor: pointer;
   border-radius: 8px;
 }
 
@@ -1061,11 +1076,13 @@
     background: #1f1f1f;
   }
 
-  /* Action button */
+  /* Action buttons: rely on Button type (primary / danger) for colors */
   .actionButton {
-    background-color: #3a3a3a !important;
-    color: rgba(255, 255, 255, 0.88) !important;
-    border-color: rgba(255, 255, 255, 0.15) !important;
+    flex: 1;
+    height: 34px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 8px;
   }
 
   .deleteButton {

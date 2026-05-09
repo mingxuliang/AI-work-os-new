@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useAppMessage } from "../hooks/useAppMessage";
-import AgentSelector from "../components/AgentSelector";
 import {
   SparkWifiLine,
   SparkUserGroupLine,
@@ -457,27 +456,19 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
           })}
         </nav>
       ) : (
-        <>
-          {/* Agent-scoped section: selector + Chat + Control + Workspace */}
-          <div className={styles.agentScopedSection}>
-            <div className={styles.agentSelectorContainer}>
-              <AgentSelector collapsed={collapsed} />
-            </div>
-            <Menu
-              mode="inline"
-              selectedKeys={[selectedKey]}
-              openKeys={DEFAULT_OPEN_KEYS}
-              onClick={({ key }) => {
-                const path = KEY_TO_PATH[String(key)];
-                if (path) navigate(path);
-              }}
-              items={agentMenuItems}
-              theme={isDark ? "dark" : "light"}
-              className={styles.sideMenu}
-            />
-          </div>
-
-          {/* Global settings section */}
+        <div className={styles.sidebarNavCard}>
+          <Menu
+            mode="inline"
+            selectedKeys={[selectedKey]}
+            openKeys={DEFAULT_OPEN_KEYS}
+            onClick={({ key }) => {
+              const path = KEY_TO_PATH[String(key)];
+              if (path) navigate(path);
+            }}
+            items={agentMenuItems}
+            theme={isDark ? "dark" : "light"}
+            className={styles.sideMenu}
+          />
           <Menu
             mode="inline"
             selectedKeys={[selectedKey]}
@@ -493,7 +484,7 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
             theme={isDark ? "dark" : "light"}
             className={styles.sideMenu}
           />
-        </>
+        </div>
       )}
 
       {authEnabled && !collapsed && (

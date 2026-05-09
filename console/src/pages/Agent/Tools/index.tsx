@@ -343,7 +343,6 @@ export default function ToolsPage() {
                       <Button
                         size="small"
                         type="primary"
-                        ghost
                         onClick={() => handleToggle(tool)}
                         icon={
                           tool.enabled ? (
