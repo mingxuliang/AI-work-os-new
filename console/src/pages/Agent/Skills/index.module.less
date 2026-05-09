@@ -1175,12 +1175,12 @@
 
   /* Skill card */
   .skillCard {
-    background: #1f1f1f;
-    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--copaw-dm-surface-raised, #1a2235);
+    border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
 
     &:hover {
-      border-color: rgba(255, 255, 255, 0.3);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      border-color: rgba(59, 130, 246, 0.35);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
     }
   }
 
@@ -1203,7 +1203,7 @@
   }
 
   .cardFooter {
-    background: #1f1f1f;
+    background: var(--copaw-dm-surface, #111827);
   }
 
   .skillTitle {
@@ -1299,8 +1299,8 @@
 
   /* Search input - dark mode */
   .searchInput {
-    background: #2a2a2a;
-    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--copaw-dm-input, #1f2a42);
+    border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
     color: rgba(255, 255, 255, 0.88);
 
     &::placeholder {
@@ -1316,8 +1316,8 @@
   .tagSelect {
     :global {
       .ant-select-selector {
-        background: #2a2a2a;
-        border-color: rgba(255, 255, 255, 0.15);
+        background: var(--copaw-dm-input, #1f2a42);
+        border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
       }
 
       .ant-select-selection-item {
@@ -1364,13 +1364,13 @@
   }
 
   .deleteButton {
-    background-color: #4a4a4a !important;
-    color: rgba(255, 100, 100, 0.85) !important;
-    border-color: #5a5a5a !important;
+    background-color: var(--copaw-dm-surface, #111827) !important;
+    color: #f87171 !important;
+    border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06)) !important;
 
     &:hover {
-      background-color: rgba(255, 77, 79, 0.15) !important;
-      border-color: rgba(255, 77, 79, 0.4) !important;
+      background-color: rgba(239, 68, 68, 0.15) !important;
+      border-color: rgba(248, 113, 113, 0.45) !important;
       color: #ff4d4f !important;
     }
   }
@@ -1413,7 +1413,7 @@
   .poolTransferModal {
     :global {
       .ant-modal-body {
-        background: #2d2d2d;
+        background: var(--copaw-dm-surface-raised, #1a2235);
       }
     }
   }
@@ -1435,11 +1435,11 @@
 
   /* List mode - dark mode */
   .skillListItem {
-    background: #1f1f1f;
-    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--copaw-dm-surface-raised, #1a2235);
+    border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
 
     &:hover {
-      background: #2a2a2a;
+      background: var(--copaw-dm-input, #1f2a42);
     }
   }
 

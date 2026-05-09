@@ -355,20 +355,25 @@
   }
 
   .filterTabActive {
-    background: #2a2a2a;
-    color: #3b82f6;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.1);
+    color: #93c5fd;
+    font-weight: 500;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.05) inset,
+      0 4px 14px rgba(0, 0, 0, 0.42);
   }
 
   .loadingText {
-    color: rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.45);
   }
 
   /* Card background and text */
   .channelCard {
     &.normal {
-      border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.1);
+      box-shadow:
+        0 1px 0 rgba(255, 255, 255, 0.04) inset,
+        0 10px 32px rgba(0, 0, 0, 0.42);
     }
   }
 
@@ -412,11 +417,11 @@
   }
 
   .cardDescription {
-    color: rgba(255, 255, 255, 0.45);
+    color: rgba(255, 255, 255, 0.62);
   }
 
   .cardHint {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.42);
   }
 
   .drawerHeaderActions {

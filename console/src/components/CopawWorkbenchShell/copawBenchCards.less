@@ -55,9 +55,11 @@
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-panel {
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  background: rgba(24, 24, 27, 0.92) !important;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  background: var(--copaw-dm-surface-raised, #1a2235) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 14px 44px rgba(0, 0, 0, 0.48) !important;
 }
 
 /* ── 3D agent / channel card ─────────────────────────────────────── */
@@ -192,6 +194,13 @@
 
 .copaw-bench-visual-scope .cbc-icon3d.cbc-icon3d--plain::before {
   display: none;
+}
+
+/* 深色：品牌图标区略抬底，避免与卡面融在一起 */
+.copaw-bench-visual-scope.dark-bench .cbc-icon3d.cbc-icon3d--plain {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
 }
 
 .copaw-bench-visual-scope .cbc-tag {
@@ -346,7 +355,7 @@
 }
 
 .copaw-bench-visual-scope.dark-bench .copaw-bench-page-desc {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--copaw-dm-text-secondary, #94a3b8);
 }
 
 .copaw-bench-visual-scope .cbc-card.cbc-card--selected {
@@ -357,9 +366,11 @@
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-card.cbc-card--selected {
+  border-color: rgba(251, 146, 60, 0.5);
   box-shadow:
-    0 0 0 2px rgba(251, 146, 60, 0.45),
-    0 8px 28px rgba(0, 0, 0, 0.35);
+    0 0 0 1px rgba(251, 146, 60, 0.35),
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 16px 42px rgba(0, 0, 0, 0.5);
 }
 
 /* ── Agent grid ─────────────────────────────────────────────────── */
@@ -399,24 +410,84 @@
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-card {
-  background: rgba(30, 30, 34, 0.95);
+  background: var(--copaw-dm-surface-raised, #1a2235);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   box-shadow:
-    0 1px 2px rgba(0, 0, 0, 0.35),
-    0 8px 26px rgba(0, 0, 0, 0.28);
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 10px 36px rgba(0, 0, 0, 0.42);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-card:hover,
+.copaw-bench-visual-scope.dark-bench .cbc-card:focus-visible {
+  border-color: rgba(59, 130, 246, 0.42);
+  box-shadow:
+    0 0 0 1px rgba(59, 130, 246, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-card--green:hover,
+.copaw-bench-visual-scope.dark-bench .cbc-card--green:focus-visible {
+  border-color: rgba(74, 222, 128, 0.42);
+  box-shadow:
+    0 0 0 1px rgba(34, 197, 94, 0.28),
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-card::after {
+  opacity: 0.38;
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-status-pill {
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-status-text-off {
+  color: rgba(203, 213, 225, 0.75);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-status-dot--off {
+  background: rgba(148, 163, 184, 0.55);
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.2);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-status-text-on {
+  color: #93c5fd;
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-tag {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.07);
   border-color: rgba(255, 255, 255, 0.14);
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(248, 250, 252, 0.88);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-card--green .cbc-tag {
+  background: rgba(34, 197, 94, 0.14);
+  border-color: rgba(74, 222, 128, 0.32);
+  color: rgba(220, 252, 231, 0.95);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-card--green .cbc-status-text-on {
+  color: rgba(167, 243, 208, 0.95);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-enabled-ring {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(59, 130, 246, 0.42),
+    0 0 22px rgba(37, 99, 235, 0.2);
+}
+
+.copaw-bench-visual-scope.dark-bench .cbc-card--green .cbc-enabled-ring {
+  box-shadow:
+    inset 0 0 0 1.5px rgba(34, 197, 94, 0.4),
+    0 0 22px rgba(22, 163, 74, 0.2);
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-card .card-title {
-  color: rgba(255, 255, 255, 0.9) !important;
+  color: var(--copaw-dm-text-primary, #ffffff) !important;
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-agent-card-actions {
@@ -424,5 +495,5 @@
 }
 
 .copaw-bench-visual-scope.dark-bench .cbc-meta {
-  color: rgba(255, 255, 255, 0.42) !important;
+  color: var(--copaw-dm-text-secondary, #94a3b8) !important;
 }

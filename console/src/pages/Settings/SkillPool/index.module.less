@@ -917,8 +917,8 @@
 
   /* Search input - dark mode */
   .searchInput {
-    background: #2a2a2a;
-    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--copaw-dm-input, #1f2a42);
+    border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
     color: rgba(255, 255, 255, 0.88);
 
     &::placeholder {
@@ -934,8 +934,8 @@
   .tagSelect {
     :global {
       .ant-select-selector {
-        background: #2a2a2a;
-        border-color: rgba(255, 255, 255, 0.15);
+        background: var(--copaw-dm-input, #1f2a42);
+        border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
       }
 
       .ant-select-selection-item {
@@ -1073,7 +1073,7 @@
   }
 
   .cardFooter {
-    background: #1f1f1f;
+    background: var(--copaw-dm-surface, #111827);
   }
 
   /* Action buttons: rely on Button type (primary / danger) for colors */
@@ -1086,9 +1086,9 @@
   }
 
   .deleteButton {
-    background-color: #3a3a3a !important;
-    color: rgba(255, 255, 255, 0.55) !important;
-    border-color: rgba(255, 255, 255, 0.12) !important;
+    background-color: var(--copaw-dm-surface, #111827) !important;
+    color: var(--copaw-dm-text-secondary, #94a3b8) !important;
+    border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06)) !important;
   }
 
   .viewToggleBtn {
@@ -1106,11 +1106,11 @@
   }
 
   .skillListItem {
-    background: #1f1f1f;
-    border-color: rgba(255, 255, 255, 0.15);
+    background: var(--copaw-dm-surface-raised, #1a2235);
+    border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
 
     &:hover {
-      background: #2a2a2a;
+      background: var(--copaw-dm-input, #1f2a42);
     }
   }
 

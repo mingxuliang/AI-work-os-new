@@ -275,14 +275,34 @@
 
   /* 深色：同一套圆角方式 */
   &.siderDark {
-    background: #0f172a !important;
-    border-right-color: rgba(148, 163, 184, 0.12) !important;
-    box-shadow: 4px 0 36px rgba(0, 0, 0, 0.32);
+    background: var(--copaw-dm-rail, #0e1525) !important;
+    border-right-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06)) !important;
+    box-shadow:
+      4px 0 32px rgba(0, 0, 0, 0.42),
+      inset -1px 0 0 rgba(255, 255, 255, 0.04);
+
+    .siderAmbientOrbA {
+      background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.12) 0%,
+        transparent 68%
+      );
+    }
+
+    .siderAmbientOrbB {
+      background: radial-gradient(
+        circle,
+        rgba(37, 99, 235, 0.07) 0%,
+        transparent 70%
+      );
+    }
 
     .sidebarNavCard {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.08);
-      box-shadow: none;
+      background: var(--copaw-dm-surface, #111827);
+      border-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.045),
+        0 8px 28px rgba(0, 0, 0, 0.38);
     }
 
     :global {
@@ -532,8 +552,8 @@
 /* ─── Dark mode overrides ─────────────────────────────────────────────────── */
 :global(.dark-mode) {
   .header {
-    background: rgba(15, 23, 42, 0.92) !important;
-    border-bottom-color: rgba(148, 163, 184, 0.12) !important;
+    background: rgba(10, 15, 30, 0.96) !important;
+    border-bottom-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06)) !important;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     color: rgba(255, 255, 255, 0.85);

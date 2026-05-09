@@ -38,15 +38,19 @@ html {
 
 /* ── 工作台底板（纯色灰，无网格） ───────────────────────────────────── */
 html.dark-mode {
-  scrollbar-color: rgba(100, 116, 139, 0.45) transparent;
+  scrollbar-color: rgba(34, 211, 238, 0.22) transparent;
 }
 
 html.dark-mode ::-webkit-scrollbar-thumb {
-  background: rgba(100, 116, 139, 0.42);
+  background: rgba(34, 211, 238, 0.22);
 }
 
 html.dark-mode ::-webkit-scrollbar-thumb:hover {
-  background: rgba(148, 163, 184, 0.55);
+  background: rgba(45, 212, 191, 0.42);
+}
+
+html.dark-mode ::-webkit-scrollbar-thumb:active {
+  background: rgba(6, 182, 212, 0.55);
 }
 
 .ant-layout-content.page-container,
@@ -58,7 +62,7 @@ html.dark-mode ::-webkit-scrollbar-thumb:hover {
 html.dark-mode .ant-layout-content.page-container,
 html.dark-mode .qwenpaw-layout-content.page-container,
 html.dark-mode .page-container {
-  background: #0c0c0e !important;
+  background: var(--copaw-dm-canvas) !important;
 }
 
 .page-content {
@@ -75,7 +79,7 @@ html.dark-mode .page-container {
 
 html.dark-mode .ant-layout,
 html.dark-mode .qwenpaw-layout {
-  background: #0c0c0e !important;
+  background: var(--copaw-dm-canvas) !important;
 }
 
 /* ── Modal（modal-overlay / modal-panel） ──────────────────────────── */
@@ -179,19 +183,19 @@ html.dark-mode .qwenpaw-modal-mask {
 
 html.dark-mode .ant-modal-header,
 html.dark-mode .qwenpaw-modal .qwenpaw-modal-header {
-  border-bottom-color: rgba(255, 255, 255, 0.1) !important;
-  background: rgba(24, 24, 27, 0.78) !important;
+  border-bottom-color: var(--copaw-dm-border-subtle, rgba(255, 255, 255, 0.05)) !important;
+  background: rgba(26, 34, 53, 0.94) !important;
 }
 
 html.dark-mode .ant-modal-title,
 html.dark-mode .qwenpaw-modal .qwenpaw-modal-title {
-  color: rgba(255, 255, 255, 0.92) !important;
+  color: var(--copaw-dm-text-primary, #ffffff) !important;
 }
 
 html.dark-mode .ant-modal-footer,
 html.dark-mode .qwenpaw-modal .qwenpaw-modal-footer {
-  border-top-color: rgba(255, 255, 255, 0.1) !important;
-  background: rgba(24, 24, 27, 0.65) !important;
+  border-top-color: var(--copaw-dm-border-subtle, rgba(255, 255, 255, 0.05)) !important;
+  background: rgba(26, 34, 53, 0.88) !important;
 }
 
 html.dark-mode .ant-modal-body .ant-input:not([disabled]),
@@ -206,7 +210,7 @@ html.dark-mode .qwenpaw-modal-body textarea.qwenpaw-input,
 html.dark-mode .qwenpaw-modal-body .qwenpaw-select .qwenpaw-select-selector,
 html.dark-mode .qwenpaw-modal-body .qwenpaw-input-number,
 html.dark-mode .qwenpaw-modal-body .qwenpaw-picker {
-  background: rgba(39, 39, 42, 0.88) !important;
+  background: var(--copaw-dm-input, #1f2a42) !important;
 }
 
 /* 创建/编辑智能体：双栏布局，content 与 body 无内边距（由内层 agentModalBody 控制） */
@@ -244,16 +248,16 @@ html.dark-mode .qwenpaw-modal-body .qwenpaw-picker {
 }
 
 html.dark-mode .ant-modal-confirm .ant-modal-confirm-title {
-  color: rgba(255, 255, 255, 0.92) !important;
+  color: var(--copaw-dm-text-primary, #ffffff) !important;
 }
 
 html.dark-mode .ant-modal-confirm .ant-modal-confirm-content {
-  color: rgba(203, 213, 225, 0.9) !important;
+  color: var(--copaw-dm-text-secondary, #94a3b8) !important;
 }
 
 html.dark-mode .ant-modal-confirm .ant-modal-confirm-btns {
-  border-top-color: rgba(255, 255, 255, 0.1);
-  background: rgba(24, 24, 27, 0.45);
+  border-top-color: var(--copaw-dm-border-subtle, rgba(255, 255, 255, 0.05));
+  background: rgba(26, 34, 53, 0.72);
 }
 
 /* ── Drawer 蒙层与圆角 ─────────────────────────────────────────────── */
