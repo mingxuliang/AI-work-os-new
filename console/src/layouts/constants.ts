@@ -39,6 +39,8 @@ export const KEY_TO_PATH: Record<string, string> = {
   "voice-transcription": "/voice-transcription",
   debug: "/debug",
   backups: "/backups",
+  workbench: "/workbench",
+  users: "/users",
 };
 
 export const KEY_TO_LABEL: Record<string, string> = {
@@ -61,6 +63,7 @@ export const KEY_TO_LABEL: Record<string, string> = {
   agents: "nav.agents",
   debug: "nav.debug",
   backups: "nav.backups",
+  workbench: "nav.workbench",
 };
 
 // ── URL helpers ───────────────────────────────────────────────────────────

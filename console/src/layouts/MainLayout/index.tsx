@@ -38,6 +38,8 @@ const VoiceTranscriptionPage = lazyImportWithRetry(
 const AgentsPage = lazyImportWithRetry("../../pages/Settings/Agents");
 const DebugPage = lazyImportWithRetry("../../pages/Settings/Debug");
 const BackupsPage = lazyImportWithRetry("../../pages/Settings/Backups");
+const WorkbenchPage = lazyImportWithRetry("../../pages/Workbench");
+const UsersPage = lazyImportWithRetry("../../pages/Settings/Users");
 
 const { Content } = Layout;
 
@@ -63,6 +65,8 @@ const pathToKey: Record<string, string> = {
   "/voice-transcription": "voice-transcription",
   "/debug": "debug",
   "/backups": "backups",
+  "/workbench": "workbench",
+  "/users": "users",
 };
 
 export default function MainLayout() {
@@ -125,6 +129,8 @@ export default function MainLayout() {
                   />
                   <Route path="/debug" element={<DebugPage />} />
                   <Route path="/backups" element={<BackupsPage />} />
+                  <Route path="/workbench" element={<WorkbenchPage />} />
+                  <Route path="/users" element={<UsersPage />} />
                   {pluginRoutes.map((route) => (
                     <Route
                       key={route.path}

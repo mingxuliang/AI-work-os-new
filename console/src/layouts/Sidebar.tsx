@@ -37,6 +37,7 @@ import {
   SparkBarChartLine,
   SparkDebugLine,
   SparkSaveLine,
+  SparkAdvancedMonitoringLine,
 } from "@agentscope-ai/icons";
 import { clearAuthToken } from "../api/config";
 import { authApi } from "../api/modules/auth";
@@ -137,6 +138,12 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
   // ── Collapsed nav items (all leaf pages) ──────────────────────────────
 
   const collapsedNavItems = [
+    {
+      key: "workbench",
+      icon: <SparkAdvancedMonitoringLine size={18} />,
+      path: "/workbench",
+      label: t("nav.workbench", "岗位工作台"),
+    },
     {
       key: "chat",
       icon: <Bot size={18} strokeWidth={1.85} aria-hidden />,
@@ -258,6 +265,12 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       label: t("nav.voiceTranscription"),
     },
     {
+      key: "users",
+      icon: <SparkUserGroupLine size={18} />,
+      path: "/users",
+      label: t("nav.users", "用户管理"),
+    },
+    {
       key: "debug",
       icon: <SparkDebugLine size={18} />,
       path: "/debug",
@@ -275,6 +288,11 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
   // ── Menu items — agent-scoped (Chat + Control + Workspace) ──────────────
 
   const agentMenuItems: MenuProps["items"] = [
+    {
+      key: "workbench",
+      label: collapsed ? null : t("nav.workbench", "岗位工作台"),
+      icon: <SparkAdvancedMonitoringLine size={16} />,
+    },
     {
       key: "chat",
       label: collapsed ? null : t("nav.chat"),
@@ -356,6 +374,11 @@ export default function Sidebar({ selectedKey }: SidebarProps) {
       key: "settings-group",
       label: collapsed ? null : t("nav.settings"),
       children: [
+        {
+          key: "users",
+          label: collapsed ? null : t("nav.users", "用户管理"),
+          icon: <SparkUserGroupLine size={16} />,
+        },
         {
           key: "agents",
           label: collapsed ? null : t("nav.agents"),
