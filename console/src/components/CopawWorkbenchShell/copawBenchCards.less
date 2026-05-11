@@ -497,3 +497,97 @@
 .copaw-bench-visual-scope.dark-bench .cbc-meta {
   color: var(--copaw-dm-text-secondary, #94a3b8) !important;
 }
+
+/* ── Dark bench: visual depth & glow polish (ported from opt平台) ─────────── */
+
+/* Running glow bar — cyan gradient top edge (opt平台 via-cyan-400/50) */
+.copaw-bench-visual-scope.dark-bench .cbc-card--running-glow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.55), transparent);
+  border-radius: 16px 16px 0 0;
+  animation: cbc-channelPulse 2s ease-in-out infinite;
+  z-index: 10;
+}
+
+/* Progress bar inside dark bench cards — cyan gradient */
+.copaw-bench-visual-scope.dark-bench [class*="progress"] .ant-progress-bg,
+.copaw-bench-visual-scope.dark-bench [class*="progress"] .qwenpaw-progress-bg {
+  background: linear-gradient(90deg, #22d3ee, #06b6d4) !important;
+}
+
+/* Card panel inner (embedded table / list) — deep surface */
+.copaw-bench-visual-scope.dark-bench .cbc-panel-inner {
+  background: var(--copaw-dm-deep, #0d1424);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Status pill text — running uses cyan (opt平台 text-cyan-400) */
+.copaw-bench-visual-scope.dark-bench .cbc-status-text-running {
+  color: #22d3ee;
+}
+
+/* Status dot — running pulse in cyan */
+.copaw-bench-visual-scope.dark-bench .cbc-status-dot--running {
+  background: #22d3ee;
+  animation: cbc-statusPulse-cyan 2.4s ease-in-out infinite;
+}
+
+@keyframes cbc-statusPulse-cyan {
+  0%, 100% {
+    box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.35);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(34, 211, 238, 0);
+    transform: scale(1.06);
+  }
+}
+
+/* Agent-card footer border — darker (opt平台 border-white/[0.06]) */
+.copaw-bench-visual-scope.dark-bench .cbc-agent-card-actions {
+  border-top-color: var(--copaw-dm-border, rgba(255, 255, 255, 0.06));
+}
+
+/* Inner highlight top (1px white edge) — glass effect for all dark cards */
+.copaw-bench-visual-scope.dark-bench .cbc-card {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.03) inset,
+    0 10px 36px rgba(0, 0, 0, 0.48);
+}
+
+/* Hover: cyan border glow (matches opt平台 AgentCard selected) */
+.copaw-bench-visual-scope.dark-bench .cbc-card:hover {
+  border-color: rgba(6, 182, 212, 0.35) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 0 0 1px rgba(6, 182, 212, 0.2),
+    0 18px 52px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* Tag in dark — opt平台 bg-white/[0.04] text-slate-400 */
+.copaw-bench-visual-scope.dark-bench .cbc-tag {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  color: rgba(203, 213, 225, 0.85) !important;
+}
+
+/* Page section description — slate-400 */
+.copaw-bench-visual-scope.dark-bench .copaw-bench-page-desc {
+  color: var(--copaw-dm-text-secondary, #94a3b8);
+}
+
+/* Section title in dark bench */
+.copaw-bench-visual-scope.dark-bench .cbc-section-title {
+  color: rgba(148, 163, 184, 0.55);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
